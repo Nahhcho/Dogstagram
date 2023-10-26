@@ -1,0 +1,30 @@
+.icon {
+    height: 20px;
+    width: 30px;
+}
+
+.post-img {
+    width: 350px;
+    height: 300px;
+}
+
+.post-container {
+    /* Center the element both horizontally and vertically */
+    background-color: lightgray;
+    padding: 20px; 
+    width: 390px;
+    left: 50%;
+    
+}
+
+.card-container {
+    display: grid;
+    grid-template-rows: 530px 530px 530px;
+    grid-template-columns: 400px 400px 400px;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,0 +1,7 @@
+.profile-list {
+    width: 50px;
+}
+
+.list-group-item:hover {
+    background-color: lightgray
+}

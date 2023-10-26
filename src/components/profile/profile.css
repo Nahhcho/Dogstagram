@@ -1,0 +1,20 @@
+h3 {
+    margin-top: 50px;
+}
+
+.pfp {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+}
+
+.profile-header {
+    display: flex;
+}
+
+.message-button {
+    margin: 5px;
+}
+
+
