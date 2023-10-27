@@ -38,7 +38,6 @@ return (
             </div>
                 {conversation.messages[conversation.messages.length-1].sender.username}:{` ${conversation.messages[conversation.messages.length-1].text}`}
             </div>
-            <span class="badge bg-primary rounded-pill">14</span>
         </li>
     </ol>
         ))) : (null)

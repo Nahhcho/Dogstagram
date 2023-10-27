@@ -19,7 +19,7 @@ const Jumbotron = () => {
     }
 
     const updateImg = (e) => {
-        setNewPost({...newPost, img: e.target.value})
+        setNewPost({...newPost, img: e.target.files[0]})
     }
 
     const post = () => {
@@ -31,13 +31,13 @@ const Jumbotron = () => {
             alert("Post A Picture")
         }
         else {
+          const formData = new FormData();
+          formData.append('caption', newPost.caption);
+          formData.append('img', newPost.img);
+          formData.append('poster', session.user);
             fetch(`${API_URL}/new_post`, {
                 method: 'POST',
-                body: JSON.stringify({
-                    caption: newPost.caption,
-                    img: newPost.img,
-                    poster: session.user
-                })
+                body: formData
             })
             .then(response => response.json())
             .then(results => {
@@ -64,10 +64,10 @@ const Jumbotron = () => {
       }
       
     <div class="jumbotron">
-        <h1 class="display-4">MonkeyGram</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <h1 class="display-4">DogstaGram</h1>
+        <p class="lead">Connect with friends and share pictures of your bestfriends.</p>
         <hr class="my-4" />
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p>Remember, only pictures of dogs will be posted!</p>
         <>
 
         {
@@ -95,7 +95,7 @@ const Jumbotron = () => {
             Caption: <input type="text" onChange={(e) => updateCaption(e)}/>
           </div>
           <div class="modal-body">
-            Img: <input type="text" onChange={(e) => updateImg(e)}/>
+            Img: <input type="file" onChange={(e) => updateImg(e)}/>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

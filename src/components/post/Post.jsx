@@ -99,7 +99,7 @@ const Post = ({post}) => {
           session.user == post.poster && location.pathname == `/profile/${session.user}` ? (<button onClick={deletePost}>Delete Post</button>) : (null)
         }
       </div>
-      <img src={post.img} alt="monkey" class="post-img" />
+      <img src={`http://localhost:8000${post.img}`} alt="img" class="post-img" />
       <div class="img-container">
         <img class="icon" onClick={session.isLoggedIn ? (() => postLike(post.id)) : (() => {navigate('/login')})} src="https://visualmodo.com/wp-content/uploads/2020/03/Everything-You-Need-To-Know-About-Instagram-Hiding-Likes.png" />
         <img class="icon" data-toggle="modal" data-target={`#commentModal${post.id}`} src="https://cdn0.iconfinder.com/data/icons/social-media-logo-4/32/Social_Media_instagram_comment-512.png" />
