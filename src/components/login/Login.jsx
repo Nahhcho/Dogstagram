@@ -5,6 +5,7 @@ import { AuthContext } from '../../App';
 const Login = () => {
     const navigate = useNavigate();
     const [session, setSession] = useContext(AuthContext);
+    const csrfToken = getCookie('csrftoken');
 
     const [userAttempt, setUserAttempt] = useState({
       username: '',
@@ -32,6 +33,7 @@ const Login = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
         },
         body: JSON.stringify({
             username: userAttempt.username,
