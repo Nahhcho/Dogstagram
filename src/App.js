@@ -11,7 +11,6 @@ import MessagePage from "./containers/messagePage/MessagePage";
 import Conversation from "./components/conversation/Conversation";
 import NewConversation from "./components/newConversation/NewConversation";
 
-const API_URL = 'http://127.0.0.1:8000/'
 
 export const AuthContext = React.createContext();
 
@@ -19,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const [session, setSession] = useState({
     isLoggedIn: false,
     user: null,
-    API_URL: 'https://dogstagram-backend.vercel.app/'
+    API_URL: 'https://dogstagram-backend.vercel.app'
   });
 
   return (
