@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './workouts.css'
 import { Link } from 'react-router-dom'
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Workouts = () => {
 
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    fetch(`${API_URL}/all_posts`)
+    fetch(`${session.API_URL}/all_posts`)
     .then(response => response.json())
     .then(posts => {
       console.log(posts)

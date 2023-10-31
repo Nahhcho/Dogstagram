@@ -3,8 +3,6 @@ import { AuthContext } from '../../App';
 import { Link,  useLocation, useNavigate } from 'react-router-dom';
 import Comments from '../comments.jsx/Comments';
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Post = ({post}) => {
 
     const navigate = useNavigate()
@@ -16,7 +14,7 @@ const Post = ({post}) => {
 
     const postLike = () => {
       console.log(session.user)
-      fetch(`${API_URL}/post_detail/${post.id}`, {
+      fetch(`${session.API_URL}/post_detail/${post.id}`, {
         method: 'POST',
         body: JSON.stringify({
           type: 'like',
@@ -26,7 +24,7 @@ const Post = ({post}) => {
       .then(response => response.json())
       .then(result => {
         console.log(result)
-        fetch(`${API_URL}/post_detail/${post.id}`)
+        fetch(`${session.API_URL}/post_detail/${post.id}`)
           .then(response => response.json())
           .then(post => {
                 setLikes(post.likes)
@@ -39,7 +37,7 @@ const Post = ({post}) => {
       }
     
       const postComment = () => {
-        fetch(`${API_URL}/post_detail/${post.id}`, {
+        fetch(`${session.API_URL}/post_detail/${post.id}`, {
           method: 'POST',
           body: JSON.stringify({
             type: 'comment',
@@ -51,7 +49,7 @@ const Post = ({post}) => {
         .then(result => {
           console.log(result)
           setComment('')
-          fetch(`${API_URL}/post_detail/${post.id}`)
+          fetch(`${session.API_URL}/post_detail/${post.id}`)
           .then(response => response.json())
           .then(post => {
                 setComments(post.comments)
@@ -60,7 +58,7 @@ const Post = ({post}) => {
       }
     
       const deleteComment = (id) => {
-        fetch(`${API_URL}/comment/${id}`, {
+        fetch(`${session.API_URL}/comment/${id}`, {
           method: 'DELETE',
           body: JSON.stringify({
             id
@@ -69,7 +67,7 @@ const Post = ({post}) => {
         .then(response => response.json())
         .then(result => {
           console.log(result)
-          fetch(`${API_URL}/post_detail/${post.id}`)
+          fetch(`${session.API_URL}/post_detail/${post.id}`)
           .then(response => response.json())
           .then(post => {
                 setComments(post.comments)
@@ -78,7 +76,7 @@ const Post = ({post}) => {
       }
 
       const deletePost = () => {
-        fetch(`${API_URL}/post_detail/${post.id}`, {
+        fetch(`${session.API_URL}/post_detail/${post.id}`, {
           method: 'DELETE'
         })
         .then(response => response.json())
@@ -99,7 +97,7 @@ const Post = ({post}) => {
           session.user == post.poster && location.pathname == `/profile/${session.user}` ? (<button onClick={deletePost}>Delete Post</button>) : (null)
         }
       </div>
-      <img src={`${post.img}`} alt="img" class="post-img" />
+      <img src={`${post.img.url}`} alt="img" class="post-img" />
       <div class="img-container">
         <img class="icon" onClick={session.isLoggedIn ? (() => postLike(post.id)) : (() => {navigate('/login')})} src="https://visualmodo.com/wp-content/uploads/2020/03/Everything-You-Need-To-Know-About-Instagram-Hiding-Likes.png" />
         <img class="icon" data-toggle="modal" data-target={`#commentModal${post.id}`} src="https://cdn0.iconfinder.com/data/icons/social-media-logo-4/32/Social_Media_instagram_comment-512.png" />

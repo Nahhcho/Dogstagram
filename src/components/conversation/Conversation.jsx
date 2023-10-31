@@ -3,8 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import './conversation.css'
 import { AuthContext } from '../../App'
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Conversation = () => {
     const navigate = useNavigate();
     const params = useParams()
@@ -15,7 +13,7 @@ const Conversation = () => {
     const [messageToSend, setMessageToSend] = useState('')
 
     const getConversation = () => {
-        fetch(`${API_URL}/conversation/${id}`)
+        fetch(`${session.API_URL}/conversation/${id}`)
         .then(response => response.json())
         .then(conversation => {
             setMessages(conversation.messages)
@@ -34,7 +32,7 @@ const Conversation = () => {
     const sendMessage = (event) => {
         if(event.key === 'Enter') {
             setMessageToSend('');
-            fetch(`${API_URL}/conversation/${id}`, {
+            fetch(`${session.API_URL}/conversation/${id}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     text: messageToSend,
@@ -45,7 +43,7 @@ const Conversation = () => {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                fetch(`${API_URL}/conversation/${id}`)
+                fetch(`${session.API_URL}/conversation/${id}`)
                 .then(response => response.json())
                 .then(conversation => {
                 setMessages(conversation.messages)

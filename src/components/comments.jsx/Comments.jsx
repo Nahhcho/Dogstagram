@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../App';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Comments = ({comments, postId}) => {
   const navigate = useNavigate()
   const [comment, setComment] = useState('');
@@ -14,7 +12,7 @@ const Comments = ({comments, postId}) => {
   }
 
   const postComment = () => {
-    fetch(`${API_URL}/post_detail/${postId}`, {
+    fetch(`${session.API_URL}/post_detail/${postId}`, {
       method: 'POST',
       body: JSON.stringify({
         type: 'comment',
@@ -30,7 +28,7 @@ const Comments = ({comments, postId}) => {
   }
 
   const deleteComment = (id) => {
-    fetch(`${API_URL}/comment/${id}`, {
+    fetch(`${session.API_URL}/comment/${id}`, {
       method: 'DELETE',
       body: JSON.stringify({
         id

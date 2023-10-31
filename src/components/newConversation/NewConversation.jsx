@@ -3,8 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../App';
 import Conversation from '../conversation/Conversation';
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const NewConversation = () => {
     const navigate = useNavigate();
     const params = useParams()
@@ -13,7 +11,7 @@ const NewConversation = () => {
 
     const postConversation = (event) => {
         if(event.key == 'Enter') {
-            fetch(`${API_URL}/messages/${session.user}`, {
+            fetch(`${session.API_URL}/messages/${session.user}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     recipient: user,

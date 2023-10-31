@@ -18,7 +18,8 @@ export const AuthContext = React.createContext();
 const AuthProvider = ({ children }) => {
   const [session, setSession] = useState({
     isLoggedIn: false,
-    user: null
+    user: null,
+    API_URL: 'https://dogstagram-backend.vercel.app/'
   });
 
   return (

@@ -4,15 +4,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import './messageNav.css'
 import { render } from '@testing-library/react';
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const MessageNav = () => {
 const navigate = useNavigate();
 const [session, setSession] = useContext(AuthContext);
 const [conversations, setConversations] = useState([]);
 
 const getProfile = () => {
-    fetch(`${API_URL}/messages/${session.user}`)
+    fetch(`${session.API_URL}/messages/${session.user}`)
     .then(response => response.json())
     .then(conversations => {
       console.log(conversations)

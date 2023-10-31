@@ -5,8 +5,6 @@ import './posts.css'
 import { AuthContext } from '../../App'
 import Post from '../post/Post'
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Posts = ({user}) => {
 
     const [posts, setPosts] = useState([]);
@@ -16,7 +14,7 @@ const Posts = ({user}) => {
     
     useEffect(() => {
         if(user === 'all') {
-            fetch(`${API_URL}/all_posts`)
+            fetch(`${session.API_URL}/all_posts`)
             .then(response => response.json())
             .then(posts => {
               console.log(posts)
@@ -24,7 +22,7 @@ const Posts = ({user}) => {
             })
         }
         else if(user === 'following') {
-          fetch(`${API_URL}/profile/${session.user}`)
+          fetch(`${session.API_URL}/profile/${session.user}`)
           .then(response => response.json())
           .then(user => {
             let users = ""
@@ -32,7 +30,7 @@ const Posts = ({user}) => {
               if(user.followings.indexOf(follow) === user.followings.length - 1) {users += `${follow}`}
               else {users += `${follow},`}
             })
-            fetch(`${API_URL}/posts/${users}`)
+            fetch(`${session.API_URL}/posts/${users}`)
             .then(response => response.json())
             .then(posts => {
                 setPosts(posts)
@@ -40,7 +38,7 @@ const Posts = ({user}) => {
             })
           }
         else {
-            fetch(`${API_URL}/posts/${user}`)
+            fetch(`${session.API_URL}/posts/${user}`)
             .then(response => response.json())
             .then(posts => {
               console.log(posts)

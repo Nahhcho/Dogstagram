@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../App';
 
-const API_URL = 'http://127.0.0.1:8000'
 
 const Jumbotron = () => {
     const navigate = useNavigate();
@@ -35,7 +34,7 @@ const Jumbotron = () => {
           formData.append('caption', newPost.caption);
           formData.append('img', newPost.img);
           formData.append('poster', session.user);
-            fetch(`${API_URL}/new_post`, {
+            fetch(`${session.API_URL}/new_post`, {
                 method: 'POST',
                 body: formData
             })

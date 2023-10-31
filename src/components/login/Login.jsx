@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useHistory, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App';
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Login = () => {
     const navigate = useNavigate();
     const [session, setSession] = useContext(AuthContext);
@@ -30,7 +28,7 @@ const Login = () => {
     const login = (event) => {
       event.preventDefault()
 
-      fetch(`${API_URL}/login`, {
+      fetch(`${session.API_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

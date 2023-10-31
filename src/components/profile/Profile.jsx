@@ -5,8 +5,6 @@ import { AuthContext } from '../../App'
 import Posts from '../posts/Posts'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Profile = () => {
   const navigate = useNavigate();
   const params = useParams()
@@ -21,7 +19,7 @@ const Profile = () => {
   })
 
   const getProfile = () => {
-    fetch(`${API_URL}/profile/${user}`)
+    fetch(`${session.API_URL}/profile/${user}`)
     .then(response => response.json())
     .then(user => {
       console.log(user)
@@ -36,7 +34,7 @@ const Profile = () => {
   }
 
   const message = () => {
-    fetch(`${API_URL}/messages/${session.user}`)
+    fetch(`${session.API_URL}/messages/${session.user}`)
     .then(response => response.json())
     .then(conversations => {
       let found = false;
@@ -60,7 +58,7 @@ const Profile = () => {
   }, [user])
 
   const updateFollowers = () => {
-    fetch(`${API_URL}/profile/${user}`, {
+    fetch(`${session.API_URL}/profile/${user}`, {
       method: 'PUT',
       body: JSON.stringify({
         follower: session.user

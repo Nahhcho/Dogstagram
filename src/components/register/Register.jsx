@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://127.0.0.1:8000'
-
 const Register = () => {
 
     const navigate = useNavigate();
@@ -42,7 +40,7 @@ const Register = () => {
             console.log(user.username)
             console.log(user.password)
             console.log(user.confirmation)
-            fetch(`${API_URL}/register`, {
+            fetch(`${session.API_URL}/register`, {
                 method: 'POST',
                 body: JSON.stringify({
                     username: user.username,
