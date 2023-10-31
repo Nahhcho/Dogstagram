@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './workouts.css'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../App'
 
 const Workouts = () => {
 
   const [posts, setPosts] = useState([])
+  const [session, setSession] = useContext(AuthContext);
 
   useEffect(() => {
     fetch(`${session.API_URL}/all_posts`)

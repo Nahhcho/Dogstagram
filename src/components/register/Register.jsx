@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../App';
 
 const Register = () => {
 
     const navigate = useNavigate();
+    const [session, setSession] = useContext(AuthContext);
 
     const [user, setUser] = useState({
         username: '',
