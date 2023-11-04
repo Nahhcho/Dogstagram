@@ -15,15 +15,10 @@ import NewConversation from "./components/newConversation/NewConversation";
 export const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
-  fetch('https://dogstagram-backend.vercel.app/bucket_url')
-  .then(response => response.json())
-  .then(result => {
-    console.log(result)
-  })
   const [session, setSession] = useState({
     isLoggedIn: false,
     user: null,
-    API_URL: 'https://dogstagram-backend.vercel.app'
+    API_URL: 'https://dogstagram-backend-39e19vwtt-nahhchos-projects.vercel.app'
   });
 
   return (
