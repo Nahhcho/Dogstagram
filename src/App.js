@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const [session, setSession] = useState({
     isLoggedIn: false,
     user: null,
-    API_URL: 'https://dogstagram-backend-39e19vwtt-nahhchos-projects.vercel.app'
+    API_URL: 'https://dogstagram-server-0ef1dc993c02.herokuapp.com'
   });
 
   return (
