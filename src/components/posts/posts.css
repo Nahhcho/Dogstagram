@@ -19,9 +19,22 @@
 
 .card-container {
     display: grid;
-    grid-template-rows: 530px 530px 530px;
-    grid-template-columns: 400px 400px 400px;
+    grid-template-columns: repeat(3, 400px);
+    gap: 20px;
 }
+
+@media (max-width: 768px) {
+    .card-container {
+      grid-template-columns: repeat(2, 400px); /* 2 columns for screens <= 768px */
+    }
+  }
+
+@media (max-width: 480px) {
+    .card-container {
+      grid-template-columns: 400px; /* 1 column for screens <= 480px */
+    }
+  }
+
 
 .post-header {
     display: flex;
