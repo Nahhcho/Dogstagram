@@ -1,12 +1,13 @@
 h3 {
     margin-top: 50px;
+    font-size: 24px
 }
 
 .pfp {
     border-radius: 50%;
     width: 200px;
     height: 200px;
-    margin: 50px;
+    margin: 30px;
 }
 
 .profile-header {
@@ -16,5 +17,6 @@ h3 {
 .message-button {
     margin: 5px;
 }
+
 
 
