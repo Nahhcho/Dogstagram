@@ -65,7 +65,7 @@ const Jumbotron = () => {
     return (
       <>
       {
-        warned ? (
+        warned.warn ? (
           <div class="alert alert-warning" role="alert">
             That's not a dog! {warned.accuracy} of being a dog.
           </div>
