@@ -11,7 +11,10 @@ const Jumbotron = () => {
         img: '',
         caption: ''
     })
-    const [warned, setWarned] = useState(false)
+    const [warned, setWarned] = useState({
+      warn: false,
+      accuracy: 0
+    })
 
     const updateCaption = (e) => {
         setNewPost({...newPost, caption: e.target.value})
@@ -22,7 +25,10 @@ const Jumbotron = () => {
     }
 
     const post = () => {
-      setWarned(false)
+      setWarned({
+        warn: false,
+        accuracy: 0
+      })
         if(newPost.caption === '') {
             alert("Caption can't be empty!")
         }
@@ -41,7 +47,11 @@ const Jumbotron = () => {
             .then(response => response.json())
             .then(results => {
               if (results.message === "That's not a dog!") {
-                setWarned(true);
+                console.log(results)
+                setWarned({
+                  warned: true,
+                  accuracy: results.prediction
+                });
               }
               else {
                 console.log(results)
@@ -57,7 +67,7 @@ const Jumbotron = () => {
       {
         warned ? (
           <div class="alert alert-warning" role="alert">
-            That's not a dog!
+            That's not a dog! {warned.accuracy} of being a dog.
           </div>
         ) : (null)
       }
