@@ -6,7 +6,7 @@ const Logout = () => {
   const [session, setSession] = useContext(AuthContext);
   const navigate = useNavigate();
 
-  setSession({isLoggedIn: false, user: null});
+  setSession({...session, isLoggedIn: false, user: null});
   navigate('/');
 }
 

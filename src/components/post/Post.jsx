@@ -82,7 +82,7 @@ const Post = ({post}) => {
         .then(response => response.json())
         .then(result => {
           console.log(result)
-          navigate('/')
+          navigate(`/`)
         })
       }
 

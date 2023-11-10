@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../App';
+import './jumbotron.css'
 
 
 const Jumbotron = () => {
@@ -13,6 +14,7 @@ const Jumbotron = () => {
     })
     const [warned, setWarned] = useState({
       warn: false,
+      loading: false,
       accuracy: 0
     })
 
@@ -25,10 +27,6 @@ const Jumbotron = () => {
     }
 
     const post = () => {
-      setWarned({
-        warn: false,
-        accuracy: 0
-      })
         if(newPost.caption === '') {
             alert("Caption can't be empty!")
         }
@@ -36,6 +34,11 @@ const Jumbotron = () => {
             alert("Post A Picture")
         }
         else {
+          setWarned({
+            ...warned,
+            loading: true,
+            warn: false
+          })
           const formData = new FormData();
           formData.append('caption', newPost.caption);
           formData.append('img', newPost.img);
@@ -50,10 +53,15 @@ const Jumbotron = () => {
                 console.log(results)
                 setWarned({
                   warn: true,
-                  accuracy: results.prediction
+                  accuracy: results.prediction,
+                  loading: false
                 });
               }
               else {
+                setWarned({
+                  ...warned,
+                  loading: false
+                })
                 console.log(results)
                 navigate(`profile/${session.user}`)
               }
@@ -65,9 +73,16 @@ const Jumbotron = () => {
     return (
       <>
       {
+        warned.loading ? (
+          <div class="alert alert-info" role="alert">
+            Analyzing post <img src="https://aleclothing.com/images/loading2.gif" className='loading-img'/>
+          </div>
+        ) : null
+      }
+      {
         warned.warn ? (
           <div class="alert alert-warning" role="alert">
-            That's not a dog! {warned.accuracy} of being a dog.
+            That's not a dog! {warned.accuracy} chance of being a dog.
           </div>
         ) : (null)
       }
@@ -108,7 +123,7 @@ const Jumbotron = () => {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onClick={post} data-dismiss="modal" >Post</button>
+            <button type="button" class="btn btn-primary" onClick={() => post()} data-dismiss="modal" >Post</button>
           </div>
         </div>
       </div>

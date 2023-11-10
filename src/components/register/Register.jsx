@@ -7,6 +7,7 @@ const Register = () => {
 
     const navigate = useNavigate();
     const [session, setSession] = useContext(AuthContext);
+    const [warn, setWarn] = useState(false)
 
     const [user, setUser] = useState({
         username: '',
@@ -37,6 +38,7 @@ const Register = () => {
 
       const register = (event) => {
         event.preventDefault()
+        setWarn(false)
   
         if(user.password == user.confirmation) {
             console.log(user.username)
@@ -52,7 +54,14 @@ const Register = () => {
             })
             .then(response => response.json())
             .then(results => {
-                navigate('/');
+              if(results.message === 'user created!') {
+                console.log(results)
+                setSession({...session, isLoggedIn: true, user: results.user})
+                navigate(`/profile/${results.user}`);
+              }
+              else {
+                setWarn(true)
+              }
               })
             }
 
@@ -60,10 +69,18 @@ const Register = () => {
 
 
   return (
+    <>
+    {
+      warn ? (
+        <div class="alert alert-warning" role="alert">
+          Username is taken!
+        </div>
+      ) : null
+    }
     <form>
         <div className="form-group">
             <label>Username</label>
-            <input onChange={(event) => updateUsername(event)} className="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email"/>
+            <input onChange={(event) => updateUsername(event)} className="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"/>
         </div>
         <div className="form-group">
             <label>Password</label>
@@ -75,6 +92,7 @@ const Register = () => {
         </div>
         <button onClick={register} type="submit" className="btn btn-primary">Submit</button>
     </form>
+    </>
   )
 }
 

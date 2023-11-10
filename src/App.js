@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const [session, setSession] = useState({
     isLoggedIn: false,
     user: null,
-    API_URL: 'https://dogstagram-server-0ef1dc993c02.herokuapp.com'
+    API_URL: 'https://dogstagram-server-0ef1dc993c02.herokuapp.com/'
   });
 
   return (
