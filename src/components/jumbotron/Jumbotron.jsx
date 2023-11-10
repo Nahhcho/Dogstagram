@@ -49,7 +49,7 @@ const Jumbotron = () => {
               if (results.message === "That's not a dog!") {
                 console.log(results)
                 setWarned({
-                  warned: true,
+                  warn: true,
                   accuracy: results.prediction
                 });
               }
